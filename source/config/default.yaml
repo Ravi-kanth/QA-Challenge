@@ -1,0 +1,6 @@
+cucumber:
+  keepBrowserOpen: false
+  browserOptions:
+    browserName: chrome
+  serverOptions: []
+  baseUrl: "http://localhost:3333"

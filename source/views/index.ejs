@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="app" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="pageTitle"></title>
+    <meta http-equiv="X-UA-Compatible" content="IE==edge,chrome=1">
+    <meta charset="utf8">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/app.css"><!--[if lte IE 8]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script type="text/javascript">
+      document.createElement('ng-include');
+      document.createElement('ng-pluralize');
+      document.createElement('ng-view');
+      // Optionally these for CSS
+      document.createElement('ng:include');
+      document.createElement('ng:pluralize');
+      document.createElement('ng:view');
+      document.createElement('date');
+    </script><![endif]-->
+  </head>
+  <body>
+    <header id="header" class="container clearfix">
+      <div class="pull-left">
+        <div id="menu" ng-controller="MenuCtrl"><a id="menu-button" title="G4Plus Menu"><img src="img/G4Plus_logo_small.png" width="40" height="29" alt="G4Plus"><i ng-if="user" class="icon-reorder"></i></a>
+          <div id="menu-popover" ng-if="user" class="popover bottom"><span class="arrow"></span>
+            <div class="apps col-sm-8 pull-right">
+              <ul class="list-unstyled breadcrumbs clearfix">
+                <li><a href="#" class="apps-home">Home</a></li>
+              </ul>
+              <ul apps-list trigger="#menu-button" depth="6" back-button=".apps-list .back" home-button=".apps-home" breadcrumbs=".apps ul.breadcrumbs" list-width="387" class="list-unstyled apps-list clearfix">
+                <li><a href="#/"><i class="icon-home"></i><strong>Home</strong></a></li>
+                <li ng-repeat="item in items"><a href="#/{{item.url}}" ng-click="getSubMenu(item.id, $event)"><i class="icon-{{item.icon||'folder-close'}}"></i><strong>{{item.name|shorten}}</strong></a></li>
+              </ul>
+            </div>
+            <div class="recent col-sm-4">
+              <h4>Recently Used Apps</h4>
+              <ul class="list-unstyled">
+                <li ng-repeat="app in recentApps"><a href="{{app.path}}"><i class="icon-caret-right"></i>{{app.name}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pull-right">
+        <!-- time-->
+        <div ng-controller="ClockCtrl" class="btn-group pull-right clock">
+          <button data-toggle="dropdown" class="btn dropdown-toggle"><i class="icon-time"></i><span></span><span class="caret"></span></button>
+          <ul class="dropdown-menu no-padding">
+            <li ng-repeat="clock in clockItems"><a href="javascript:void(0);" role="button" ng-click="saveTimeZone(clock)" tooltip-placement="left" tooltip="Set {{clock.zone}} as Default"></a></li>
+          </ul>
+        </div>
+        <!-- user profile-->
+        <div ng-if="user" class="btn-group pull-right">
+          <button data-toggle="dropdown" class="btn dropdown-toggle">{{user.name}} <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu no-padding">
+            <li class="top"><a href="#/profile"><i class="icon-user"></i> Profile</a></li>
+            <li class="bottom"><a href="#/logout"><i class="icon-signout"></i> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="clearfixlist"></div>
+    <ul class="container horizontal list-unstyled small">
+      <li class="pad-right"><a href="#">Home</a></li>
+      <li class="pad-right"><a href="#/examples">Examples</a></li>
+      <li class="pad-right"><a href="#/list">UI Flow</a></li>
+      <li class="pull-right"><a href="#/signup">Sign Up</a></li>
+    </ul>
+    <div id="content" class="container">
+      <div ng-view></div>
+    </div>
+    <footer class="footer container">
+      <p><small>&copy; Allegiant
+          <date format="YYYY"></date></small></p>
+    </footer><!--[if lte IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script><![endif]-->
+    <script src="js/vendor.js"></script>
+    <script src="js/src.templates.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

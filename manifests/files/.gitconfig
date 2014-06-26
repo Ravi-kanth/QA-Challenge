@@ -1,0 +1,22 @@
+[core]
+    excludesfile = ~/.gitignore
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+
+[diff]
+    color = auto
+    rename = copy
+
+[pager]
+    color = true
+
+[status]
+    color = auto
+
+[url "https://github"]
+    insteadOf = git://github
